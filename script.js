@@ -7,11 +7,8 @@ let queue = [];
 function enqueue(e){
     queue.unshift(e);
 }
-function dequeueLast(){
+function dequeue(){
     return queue.pop();
-}
-function queueSize(){
-    queue.length;
 }
 
 // Various global variables declared
@@ -27,6 +24,8 @@ let score = 0;
 let currentDirection = null;
 let alive = true;
 let renderGrid = true;
+let displaySpeed = 15;
+let updateInterval = 101; // Interval between game updates
 
 // Game loop
 function gameLoop() {
@@ -96,7 +95,7 @@ function moveSnake(){
 
     // Only removes the tail if the snake has not eaten an apple
     if(ateApple === false){
-        dequeueLast();
+        dequeue();
     }
     else{
         ateApple = false;
@@ -205,7 +204,7 @@ function removeGrid(){
 }
 
 function changeGridSize(direction){
-    if(direction === "up" && gridSize < 99){
+    if(direction === "up"){
         gridSize++;
     }
     else if(direction != "up" && gridSize > 2){
@@ -218,17 +217,40 @@ function changeGridSize(direction){
     document.getElementById("grid-size-text").value="Grid Size: "+gridSize;
 }
 
+function changeSnakeSpeed(direction){
+    if(direction === "up" && updateInterval > 1){
+        displaySpeed++;
+        updateInterval-=5;
+        console.log(updateInterval);
+    }
+    else if(direction != "up" && displaySpeed > 1){
+        displaySpeed--;
+        updateInterval += 5;
+    }
+    else{
+        return;
+    }
+    document.getElementById("snake-speed-text").value="Speed: "+displaySpeed;
+    clearInterval(timer);
+    timer = setInterval(update,updateInterval);
+}
+
 // Calls main game loop
 gameLoop();
 
-// Sets an nterval between logic calculations
-let timer = setInterval(update,100);
+// Sets an interval between logic calculations
+let timer = setInterval(update,updateInterval);
 
-
+// Event listener for reset button
 document.getElementById("reset").addEventListener("click", reset);
+//Event listener for button that shows/removes grid
 document.getElementById("show-grid").addEventListener("click", removeGrid);
+//Event Listeners for arrow buttons that change grid size
 document.getElementById("grid-size-left").addEventListener("click", changeGridSize.bind(null, "down"));
 document.getElementById("grid-size-right").addEventListener("click", changeGridSize.bind(null, "up"));
+//Event Listeners for arrow buttons that change snake movement speed
+document.getElementById("snake-speed-left").addEventListener("click", changeSnakeSpeed.bind(null, "down"));
+document.getElementById("snake-speed-right").addEventListener("click", changeSnakeSpeed.bind(null, "up"));
 
 // Adds an event listener for the keydown event
 document.addEventListener('keydown', function(event) {

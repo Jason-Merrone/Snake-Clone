@@ -37,7 +37,7 @@ html{
     justify-content: center;
     align-items: center;
 }
-.grid-size-button{
+.size-button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,9 +48,23 @@ html{
 #grid-size-text{
     width: 4vw;
     height: 1vw;
+    font-size: 0.6vw;
+    display: flex;
+    text-align: center;
 }
-#grid-size-title{
-    size: 1px;
+
+#snake-speed{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#snake-speed-text{
+    width: 4vw;
+    height: 1vw;
+    font-size: 0.6vw;
+    display: flex;
+    text-align: center;
 }
 
 #window-size{
