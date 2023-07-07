@@ -1,5 +1,63 @@
 html{
     background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#game{
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+}
+
+#game-settings{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.6vw;
+}
+#settings-title{
+    font-size:1.1vw;
+    margin-inline: 0.1vw;
+}
+.settings{
+    margin-bottom: 0.5vw;
+}
+
+#reset{
+    color:red;
+}
+
+#grid-size{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.grid-size-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 1.3vw;
+    height: 1.3vw;
+}
+#grid-size-text{
+    width: 4vw;
+    height: 1vw;
+}
+#grid-size-title{
+    size: 1px;
+}
+
+#window-size{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 canvas {

@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Jason's Snake Game</title>
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <canvas id="gameCanvas" width="800" height="800"></canvas>
-</body>
+  <head>
+    <title>Jason's Snake Game</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>Jason's Epic Awesome Snake Remake</h1>
+    <section>
+      <h2 id="score">Score: 0</h2>
+    </section>
+    <section id="game">
+      <canvas id="gameCanvas" width="800" height="800"></canvas>
+      <div id="game-settings">
+        <h1 id="settings-title">Game Settings</h1>
+        <button id="reset" class = "settings">Reset Game</button>
+        <button id="show-grid" class = "settings">Remove Grid</button>
+
+        <div id="grid-size" class = "settings">
+          <button id="grid-size-left" class="grid-size-button"><</button>
+          <input type="text" id="grid-size-text" autocomplete="on" value="Grid Size: 20" readonly>
+          <button id="grid-size-right" class="grid-size-button">></button>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
