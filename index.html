@@ -6,30 +6,37 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <h1>Jason's Epic Awesome Snake Remake</h1>
-    <section>
-      <h2 id="score">Score: 0</h2>
-    </section>
-    <section id="game">
-      <canvas id="gameCanvas" width="800" height="800"></canvas>
-      <div id="game-settings">
-        <h1 id="settings-title">Game Settings</h1>
-        <button id="reset" class = "settings">Reset Game</button>
-        <button id="show-grid" class = "settings">Remove Grid</button>
-
-        <div id="grid-size" class = "settings">
-          <button id="grid-size-left" class="size-button"><</button>
-          <input type="text" id="grid-size-text" autocomplete="on" value="Grid Size: 20" readonly>
-          <button id="grid-size-right" class="size-button">></button>
+    <header>
+      <h1>Jason's Epic Awesome Snake Remake</h1>
+    </header>
+    <main>
+      <section>
+        <h2 id="score">Score: 0</h2>
+      </section>
+      <!-- Start of game -->
+      <section id="game">
+        <canvas id="gameCanvas" width="800" height="800" aria-label="Snake Game"></canvas>
+        <!-- Start of settings section of game -->
+        <div id="game-settings">
+          <h1 id="settings-title">Game Settings</h1>
+          <!-- Start of buttons to control game attributes -->
+          <button id="reset" class="settings" aria-label="Reset Game">Reset Game</button>
+          <button id="show-grid" class="settings" aria-label="Toggle Grid">Remove Grid</button>
+          <div id="grid-size" class="settings">
+            <button id="grid-size-left" class="size-button" aria-label="Decrease Grid Size">&lt;</button>
+            <input type="text" id="grid-size-text" autocomplete="on" value="Grid Size: 20" readonly>
+            <button id="grid-size-right" class="size-button" aria-label="Increase Grid Size">&gt;</button>
+          </div>
+          <div id="snake-speed" class="settings">
+            <button id="snake-speed-left" class="size-button" aria-label="Decrease Snake Speed">&lt;</button>
+            <input type="text" id="snake-speed-text" autocomplete="on" value="Speed: 15" readonly>
+            <button id="snake-speed-right" class="size-button" aria-label="Increase Snake Speed">&gt;</button>
+          </div>
+          <!-- End of buttons to control game attributes -->
         </div>
-
-        <div id="snake-speed" class = "settings">
-          <button id="snake-speed-left" class="size-button"><</button>
-          <input type="text" id="snake-speed-text" autocomplete="on" value="Speed: 15" readonly>
-          <button id="snake-speed-right" class="size-button">></button>
-        </div>
-        
-      </div>
-    </section>
+        <!-- End of settings section of game -->
+      </section>
+      <!-- End of game -->
+    </main>
   </body>
 </html>

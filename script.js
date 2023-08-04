@@ -1,3 +1,4 @@
+
 // Get the canvas element
 const canvas = document.getElementById("gameCanvas");
 const c = canvas.getContext("2d");
@@ -26,6 +27,8 @@ let alive = true;
 let renderGrid = true;
 let displaySpeed = 15;
 let updateInterval = 101; // Interval between game updates
+let screenWidth = 0;
+let screenHeight = 0;
 
 // Game loop
 function gameLoop() {
@@ -37,12 +40,19 @@ function gameLoop() {
 function update() {
     handleAppleCollision(true);
     handleWallCollision();
+
     if(alive){
         moveSnake();
         handleAppleCollision(false);
     }
+    
     handleSelfCollision();
     document.getElementById("score").textContent="Score: "+score;
+
+    // Readjusts canvas size when screen size is updated
+    if(screenWidth-window.innerWidth !== 0 || screenHeight-window.innerHeight !== 0){
+        adjustCanvasSize();
+    }
 }
 
 // Render function
@@ -178,6 +188,7 @@ function findHead(){
     return [gridCoordinates[queue[0]][0],gridCoordinates[queue[0]][1]]
 }
 
+// Resets the game
 function reset(){
     queue = [];
     gridCoordinates = makeGrid();
@@ -192,6 +203,7 @@ function reset(){
     alive = true;
 }
 
+// Displays the grid if it isn't currently displayed or remove it if it is
 function removeGrid(){
     if(renderGrid === true){
         renderGrid = false;
@@ -203,6 +215,7 @@ function removeGrid(){
     }
 }
 
+// Change the size of the game grid (Resets the game)
 function changeGridSize(direction){
     if(direction === "up"){
         gridSize++;
@@ -217,6 +230,7 @@ function changeGridSize(direction){
     document.getElementById("grid-size-text").value="Grid Size: "+gridSize;
 }
 
+// Changes the time between game updates
 function changeSnakeSpeed(direction){
     if(direction === "up" && updateInterval > 1){
         displaySpeed++;
@@ -235,8 +249,26 @@ function changeSnakeSpeed(direction){
     timer = setInterval(update,updateInterval);
 }
 
+// Adjusts canvas size based on screen size
+function adjustCanvasSize(){
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+
+    if(screenWidth > screenHeight){
+        canvas.width = screenHeight-(screenHeight*.15);
+        canvas.height = screenHeight-(screenHeight*.15);
+    }
+    else {
+        canvas.width = screenWidth-(screenWidth*.2);
+        canvas.height = screenWidth-(screenWidth*.2);
+    }
+
+    reset();
+}
+
 // Calls main game loop
 gameLoop();
+
 
 // Sets an interval between logic calculations
 let timer = setInterval(update,updateInterval);
@@ -255,6 +287,12 @@ document.getElementById("snake-speed-right").addEventListener("click", changeSna
 // Adds an event listener for the keydown event
 document.addEventListener('keydown', function(event) {
     const key = event.key;
+
+    // Prevent the default behavior of the up and down keys
+    if (event.keyCode === 38 || event.keyCode === 40) {
+        event.preventDefault();
+    }
+
     if ((key === 'ArrowUp' || key === 'w' || key === 'W') && !(queue[0] === queue[1]+gridSize)) {
         currentDirection = "up";
     } 
